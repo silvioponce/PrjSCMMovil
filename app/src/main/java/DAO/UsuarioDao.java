@@ -14,7 +14,7 @@ import Util.SQLiteHelper;
 
 public class UsuarioDao {
 
-    //region Other Methods
+    //region Other otro Methods
 
     public Usuario getVerificaUsuario(Context context, String user, String contrasena) throws SQLException {
 
