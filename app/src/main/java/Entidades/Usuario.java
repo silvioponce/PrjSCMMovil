@@ -2,7 +2,7 @@ package Entidades;
 
 public class Usuario {
     
-    //region Variables Miembros
+    //region VVariables Miembros
     private int _id;
     private int IdUsuario;
     private String NomUsuario;
