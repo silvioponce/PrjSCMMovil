@@ -6,6 +6,7 @@
     <string name="prompt_password">Contraseña</string>
     <string name="action_sign_in_short">Iniciar Sesion</string>
     <string name="error_invalid_user">El Usuario es Invalido</string>
+    <string name="error_invalid_password">La Contraseña es Invalida</string>
     <string name="error_general">La Contraseña es Incorrecta</string>
     <string name="error_field_required">Este dato es requerido</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
