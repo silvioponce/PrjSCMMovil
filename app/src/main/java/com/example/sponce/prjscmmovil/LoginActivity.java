@@ -3,6 +3,10 @@ package com.example.sponce.prjscmmovil;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
@@ -29,6 +33,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +67,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private String mensaje;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,12 +134,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private boolean login() {
         boolean flag = false;
-        startActivity(new Intent(this, MDIActivity.class));
 
-
-
-
-
+        mensaje = "Este seria el mensaje";
+        flag = true;
         return flag;
     }
 
@@ -360,11 +363,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success && login()) {
-
+                startActivity(new Intent(getApplicationContext(), MDIActivity.class));
             } else {
-                mPasswordView.setError(getString(R.string.error_general));
-                mPasswordView.requestFocus();
 
+                Toast.makeText( getApplicationContext(), mensaje,Toast.LENGTH_SHORT).show();
+
+                mPasswordView.requestFocus();
             }
         }
 
