@@ -1,44 +1,16 @@
 package com.example.sponce.prjscmmovil;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
 import android.app.AlertDialog;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.StrictMode;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
-
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import BL.AdminBL;
 import BL.ComunidadBL;
@@ -50,15 +22,7 @@ import Entidades.Departamento;
 import Entidades.Municipio;
 import Entidades.Usuario;
 
-import static android.Manifest.permission.READ_CONTACTS;
-
-/**
- * A login screen that offers login via email/password.
- */
 public class LoginActivity extends AppCompatActivity {
-
-    // UI references.
-
 
     EditText mUserView;
     EditText mPasswordView;
@@ -113,7 +77,6 @@ public class LoginActivity extends AppCompatActivity {
                 String msg = null;
                 usuario = usuarioBL.getVerificaUsuario(getApplicationContext(), mUserView.getText().toString(), mPasswordView.getText().toString());
 
-
                 comunidad = comunidadBL.getComunidadById(getApplicationContext(), String.valueOf(usuario.getIdComunidad()));
 
                 msg = comunidad.getNomComunidad();
@@ -139,7 +102,6 @@ public class LoginActivity extends AppCompatActivity {
                     mensaje = "Error al ingresar las Credenciales";
                 }
 
-
             } else {
                 mensaje = "Error al Crear la Base de Datos...";
             }
@@ -152,11 +114,11 @@ public class LoginActivity extends AppCompatActivity {
                 builder.show();
             }
 
-
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        mensaje = "";
         flag = false;
         return flag;
     }
@@ -165,7 +127,6 @@ public class LoginActivity extends AppCompatActivity {
         int IdMunicipio = 0;
         int IdDepartamento = 0;
 
-
         try {
             comunidad = comunidadBL.getComunidadById(getApplicationContext(), String.valueOf(usuario.getIdComunidad()));
             municipio = municipioBL.getMunicipioById(getApplicationContext(), String.valueOf(comunidad.getIdMunicipio()));
@@ -173,7 +134,6 @@ public class LoginActivity extends AppCompatActivity {
         } catch (java.sql.SQLException e) {
             e.printStackTrace();
         }
-
 
         SharedPreferences sharedPreferences = getSharedPreferences("PreferenciasUsuario", getApplication().MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -186,11 +146,6 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
-     */
     private boolean verificaCampos() {
 
         // Reset errors.
