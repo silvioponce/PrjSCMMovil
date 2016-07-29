@@ -4,61 +4,44 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.sponce.prjscmmovil.R;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+import Adapter.NinosAdapter;
 import BL.CCMNinoBL;
-import Entidades.CCMNino;
+import BL.NinoBL;
+import Entidades.Nino;
 
-public class FragmentListaNinos extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class FragmentListNinos extends Fragment implements View.OnClickListener {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private NinoBL ninoBL = new NinoBL();
+    private ListView lista;
+    EditText txtBuscar;
+    NinosAdapter adapter;
+    ImageButton btnBuscar;
 
-    CCMNinoBL ccmNinoBL = new CCMNinoBL();
-    CasoNinosAdapter adapter;
-
-    EditText txtBuscarCasoNino;
-
-    ImageButton btnBuscarCasoNino;
-
-    int idNino = 0;
-
+    private ActionMode mActionMode;
     public int selectedItem = -1;
+    ArrayList<Nino> arrayOfNinos;
 
-    private ListView lstCasoNinos;
-    ArrayList<CCMNino> arrayOfCasoNinos;
-
-
-    public FragmentListaNinos() {
+    public FragmentListNinos() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentListaNinos.
-     */
     // TODO: Rename and change types and number of parameters
-    public static FragmentListaNinos newInstance(String param1, String param2) {
-        FragmentListaNinos fragment = new FragmentListaNinos();
+    public static FragmentListNinos newInstance(String param1, String param2) {
+        FragmentListNinos fragment = new FragmentListNinos();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -78,10 +61,49 @@ public class FragmentListaNinos extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        TextView textView = new TextView(getActivity());
-        textView.setText(R.string.hello_blank_fragment);
-        return textView;
+        // Inflate the layout for this fragment
+        View v = inflater.inflate(R.layout.activity_lista_ninos, container, false);
+        lista = (ListView) v.findViewById(R.id.lstNinos);
+        txtBuscar = (EditText) v.findViewById(R.id.txtBuscar);
+        btnBuscar = (ImageButton) v.findViewById(R.id.btnBuscar);
+
+        lista.setSelected(true);
+
+        getActivity().setTitle("Buscar Nino(a)");
+
+
+        arrayOfNinos = new ArrayList<Nino>();
+        try {
+            arrayOfNinos = ninoBL.getAllNinosArrayList(getActivity());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        adapter = new NinosAdapter(getActivity(), arrayOfNinos);
+        lista.setAdapter(adapter);
+
+        lista.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                selectedItem = adapter.getItem(position).get_id();
+                view.setSelected(true);
+                if (mActionMode != null) mActionMode.finish();
+
+
+            }
+        });
+
+
+        btnBuscar.setOnClickListener(this);
+
+        registerForContextMenu(lista);
+
+        return v;
     }
+
+    // TODO: Metodos particulares de cada Fragmento o Actividad
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -107,16 +129,11 @@ public class FragmentListaNinos extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+    @Override
+    public void onClick(View view) {
+
+    }
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

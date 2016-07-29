@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.example.sponce.prjscmmovil.R;
+
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.ArrayList;

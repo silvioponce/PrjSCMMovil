@@ -10,6 +10,8 @@
 
     </style>
 
+    <style name="AppTheme.DarkActionBar" parent="Theme.AppCompat.Light.DarkActionBar" />
+
     <style name="ButtonText">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
