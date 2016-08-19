@@ -12,8 +12,8 @@
             android:icon="@mipmap/ic_children">
 
             <intent
-                android:targetPackage="com.sci.sponce.prjscmcapp"
-                android:targetClass="com.sci.sponce.prjscmcapp.NinosActivity" />
+                android:targetPackage="com.example.sponce.prjscmmovil"
+                android:targetClass="com.example.sponce.prjscmmovil.ActivityListaNinos" />
         </Preference>
 
     </PreferenceCategory>

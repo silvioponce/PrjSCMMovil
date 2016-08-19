@@ -5,12 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.sponce.prjscmmovil.R;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import DAO.ComunidadDao;
@@ -24,9 +24,9 @@ import Entidades.Nino;
 /**
  * Created by sponce on 29/7/2016.
  */
-public class AdapterNinos extends RecyclerView.Adapter<AdapterNinos.AdaptadorViewHolder> {
+public class AdapterNinos extends RecyclerView.Adapter<AdapterNinos.ViewHolder> {
 
-    List<Nino> listNinos;
+    ArrayList<Nino> listNinos;
 
     ComunidadDao comunidadDao = new ComunidadDao();
     MunicipioDao municipioDao = new MunicipioDao();
@@ -34,21 +34,21 @@ public class AdapterNinos extends RecyclerView.Adapter<AdapterNinos.AdaptadorVie
 
     Context context;
 
-    public AdapterNinos(List<Nino> listNinos) {
+    public AdapterNinos(ArrayList<Nino> listNinos) {
         this.listNinos = listNinos;
     }
 
     @Override
-    public AdaptadorViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.listview_item_ninos, parent, false);
 
-        AdaptadorViewHolder holder = new AdaptadorViewHolder(v);
+        ViewHolder holder = new ViewHolder(v);
         context = parent.getContext();
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(AdaptadorViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
 
         Nino nino = listNinos.get(position);
 
@@ -80,7 +80,10 @@ public class AdapterNinos extends RecyclerView.Adapter<AdapterNinos.AdaptadorVie
         return 0;
     }
 
-    public static class AdaptadorViewHolder extends RecyclerView.ViewHolder
+    public interface OnItemClickListener {
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder
 {
 
     TextView tvName;
@@ -92,7 +95,7 @@ public class AdapterNinos extends RecyclerView.Adapter<AdapterNinos.AdaptadorVie
     TextView tvMunicipio;
 
 
-    public AdaptadorViewHolder (View itemView)
+    public ViewHolder(View itemView)
     {
         super(itemView);
 
@@ -105,6 +108,7 @@ public class AdapterNinos extends RecyclerView.Adapter<AdapterNinos.AdaptadorVie
         TextView tvMunicipio = (TextView) itemView.findViewById(R.id.viewMunicipio);
 
     }
+
 }
 
 

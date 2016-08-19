@@ -24,6 +24,8 @@ public class CCMNinoBL {
         }
     }
 
+
+
     public ArrayList<CCMNino> getAllCCMNinosArrayListCustom(Context context, String parametro) throws SQLException {
 
         return ccmNinoDao.getAllCCMNinosArrayListCustom(context, parametro);
