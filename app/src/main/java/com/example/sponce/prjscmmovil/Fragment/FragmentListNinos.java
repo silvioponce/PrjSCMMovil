@@ -62,8 +62,12 @@ public class FragmentListNinos extends Fragment implements AdapterNinos.OnItemCl
             e.printStackTrace();
         }
 
-        recyclerView.setAdapter(new AdapterNinos(listNinos));
+        recyclerView.setAdapter(new AdapterNinos(listNinos, this));
     }
 
 
+    @Override
+    public void onClick(AdapterNinos.ViewHolder viewHolder, String idArticulo) {
+
+    }
 }

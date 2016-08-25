@@ -34,17 +34,17 @@ public class AdapterNinos extends RecyclerView.Adapter<AdapterNinos.ViewHolder> 
 
     Context context;
 
-    public AdapterNinos(ArrayList<Nino> listNinos) {
+    public AdapterNinos(ArrayList<Nino> listNinos, OnItemClickListener escuchaClicksExterna) {
         this.listNinos = listNinos;
+        this.escuchaClicksExterna = escuchaClicksExterna;
     }
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.listview_item_ninos, parent, false);
-
-        ViewHolder holder = new ViewHolder(v);
-        context = parent.getContext();
-        return holder;
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.listview_item_ninos, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
@@ -80,36 +80,50 @@ public class AdapterNinos extends RecyclerView.Adapter<AdapterNinos.ViewHolder> 
         return 0;
     }
 
+    private String obtenerId(int posicion) {
+        if (posicion != RecyclerView.NO_POSITION) {
+            return String.valueOf(listNinos.get(posicion).get_id());
+        } else {
+            return null;
+        }
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        TextView tvName;
+        TextView tvMadre;
+        TextView tvFechaNac;
+        TextView tvSexo;
+        TextView tvComunidad;
+        TextView tvDepartamento;
+        TextView tvMunicipio;
+
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+
+            tvName = (TextView) itemView.findViewById(R.id.viewNomNino);
+            TextView tvMadre = (TextView) itemView.findViewById(R.id.viewNomMadre);
+            TextView tvFechaNac = (TextView) itemView.findViewById(R.id.viewFechaNac);
+            TextView tvSexo = (TextView) itemView.findViewById(R.id.viewSexo);
+            TextView tvComunidad = (TextView) itemView.findViewById(R.id.viewComunidad);
+            TextView tvDepartamento = (TextView) itemView.findViewById(R.id.viewDepartamento);
+            TextView tvMunicipio = (TextView) itemView.findViewById(R.id.viewMunicipio);
+
+        }
+
+
+        @Override
+        public void onClick(View view) {
+            escuchaClicksExterna.onClick(this, obtenerId(getAdapterPosition()));
+        }
+    }
+
     public interface OnItemClickListener {
+        public void onClick(ViewHolder viewHolder, String idArticulo);
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder
-{
-
-    TextView tvName;
-    TextView tvMadre;
-    TextView tvFechaNac;
-    TextView tvSexo;
-    TextView tvComunidad;
-    TextView tvDepartamento;
-    TextView tvMunicipio;
-
-
-    public ViewHolder(View itemView)
-    {
-        super(itemView);
-
-        tvName = (TextView) itemView.findViewById(R.id.viewNomNino);
-        TextView tvMadre = (TextView) itemView.findViewById(R.id.viewNomMadre);
-        TextView tvFechaNac = (TextView) itemView.findViewById(R.id.viewFechaNac);
-        TextView tvSexo = (TextView) itemView.findViewById(R.id.viewSexo);
-        TextView tvComunidad = (TextView) itemView.findViewById(R.id.viewComunidad);
-        TextView tvDepartamento = (TextView) itemView.findViewById(R.id.viewDepartamento);
-        TextView tvMunicipio = (TextView) itemView.findViewById(R.id.viewMunicipio);
-
-    }
-
-}
+    private OnItemClickListener escuchaClicksExterna;
 
 
 }
