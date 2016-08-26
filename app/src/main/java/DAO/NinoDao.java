@@ -306,8 +306,8 @@ public class NinoDao {
                     nino.set_id(c.getInt(c.getColumnIndex("_id")));
                     nino.setIdNino(c.getInt(c.getColumnIndex("IdNino")));
                     nino.setIdComunidad(c.getInt(c.getColumnIndex("IdComunidad")));
-                    //nino.setFechaRegistro(new java.util.Date(c.getString(c.getColumnIndex("FechaRegistro"))));
-                    nino.setFechaRegistro(new SimpleDateFormat("yyyy-mm-dd").parse(c.getString(c.getColumnIndex("FechaRegistro"))));
+                    nino.setFechaRegistro(new java.util.Date(c.getString(c.getColumnIndex("FechaRegistro"))));
+                    //nino.setFechaRegistro(new SimpleDateFormat("yyyy-mm-dd").parse(c.getString(c.getColumnIndex("FechaRegistro"))));
                     nino.setNomMadre(String.valueOf(c.getString(c.getColumnIndex("NomMadre"))));
                     nino.setNomNino(String.valueOf(c.getString(c.getColumnIndex("NomNino"))));
                     nino.setFechaNac(new java.util.Date(c.getString(c.getColumnIndex("FechaNac"))));

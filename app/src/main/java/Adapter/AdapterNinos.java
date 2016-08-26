@@ -21,9 +21,7 @@ import Entidades.Departamento;
 import Entidades.Municipio;
 import Entidades.Nino;
 
-/**
- * Created by sponce on 29/7/2016.
- */
+
 public class AdapterNinos extends RecyclerView.Adapter<AdapterNinos.ViewHolder> {
 
     ArrayList<Nino> listNinos;
@@ -38,7 +36,6 @@ public class AdapterNinos extends RecyclerView.Adapter<AdapterNinos.ViewHolder> 
         this.listNinos = listNinos;
         this.escuchaClicksExterna = escuchaClicksExterna;
     }
-
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -77,7 +74,11 @@ public class AdapterNinos extends RecyclerView.Adapter<AdapterNinos.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return 0;
+        if (listNinos != null) {
+            return listNinos.size() > 0 ? listNinos.size() : 0;
+        } else {
+            return 0;
+        }
     }
 
     private String obtenerId(int posicion) {
