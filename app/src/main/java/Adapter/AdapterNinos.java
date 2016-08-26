@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.example.sponce.prjscmmovil.R;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +42,8 @@ public class AdapterNinos extends RecyclerView.Adapter<AdapterNinos.ViewHolder> 
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.listview_item_ninos, parent, false);
+
+        context = parent.getContext();
         return new ViewHolder(view);
     }
 
@@ -62,9 +65,10 @@ public class AdapterNinos extends RecyclerView.Adapter<AdapterNinos.ViewHolder> 
             e.printStackTrace();
         }
 
+
         holder.tvName.setText(nino.getNomNino());
         holder.tvMadre.setText(nino.getNomMadre());
-        //tvFechaNac.setText(nino.getFechaNac().getDate());
+        holder.tvFechaNac.setText(new SimpleDateFormat("dd-MM-yyyy").format(nino.getFechaNac()));
         holder.tvSexo.setText(nino.getSexo());
         holder.tvComunidad.setText(comunidad.getNomComunidad());
         holder.tvMunicipio.setText(municipio.getNomMunicipio());
@@ -104,12 +108,12 @@ public class AdapterNinos extends RecyclerView.Adapter<AdapterNinos.ViewHolder> 
             super(itemView);
 
             tvName = (TextView) itemView.findViewById(R.id.viewNomNino);
-            TextView tvMadre = (TextView) itemView.findViewById(R.id.viewNomMadre);
-            TextView tvFechaNac = (TextView) itemView.findViewById(R.id.viewFechaNac);
-            TextView tvSexo = (TextView) itemView.findViewById(R.id.viewSexo);
-            TextView tvComunidad = (TextView) itemView.findViewById(R.id.viewComunidad);
-            TextView tvDepartamento = (TextView) itemView.findViewById(R.id.viewDepartamento);
-            TextView tvMunicipio = (TextView) itemView.findViewById(R.id.viewMunicipio);
+            tvMadre = (TextView) itemView.findViewById(R.id.viewNomMadre);
+            tvFechaNac = (TextView) itemView.findViewById(R.id.viewFechaNac);
+            tvSexo = (TextView) itemView.findViewById(R.id.viewSexo);
+            tvComunidad = (TextView) itemView.findViewById(R.id.viewComunidad);
+            tvDepartamento = (TextView) itemView.findViewById(R.id.viewDepartamento);
+            tvMunicipio = (TextView) itemView.findViewById(R.id.viewMunicipio);
 
         }
 
