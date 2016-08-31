@@ -144,6 +144,8 @@ public class LoginActivity extends AppCompatActivity {
         editor.putInt("IdMunicipio", municipio.getIdMunicipio());
         editor.putInt("IdDepartamento", municipio.getIdDepartamento());
 
+        editor.commit();
+
     }
 
     private boolean verificaCampos() {

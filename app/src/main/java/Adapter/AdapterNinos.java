@@ -131,4 +131,5 @@ public class AdapterNinos extends RecyclerView.Adapter<AdapterNinos.ViewHolder> 
     private OnItemClickListener escuchaClicksExterna;
 
 
+
 }

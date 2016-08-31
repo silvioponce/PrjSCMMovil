@@ -1,9 +1,7 @@
 package com.example.sponce.prjscmmovil;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -25,14 +23,17 @@ public class ActivityListaNinos extends AppCompatActivity {
         if (findViewById(R.id.contenedor_detalle_articulo) != null) {
             // Si es asi, entonces confirmar modo Master-Detail
             dosPaneles = true;
-
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.contenedor_detalle_articulo, new FragmentNinos())
+                    .commit();
 
         }
 
         // Agregar fragmento de lista
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.contenedor_lista, new FragmentNinos())
+                .replace(R.id.contenedor_lista, new FragmentListNinos())
                 .commit();
 
     }
@@ -60,13 +61,13 @@ public class ActivityListaNinos extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.btnNuevo) {
-            if (dosPaneles) {
-                Object buscarNinosFragment = getFragmentManager().findFragmentByTag("FragmentNinos");
-                getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_detalle_articulo, new FragmentNinos()).commit();
-
+            if (!dosPaneles) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.contenedor_lista, new FragmentNinos())
+                        .addToBackStack(null)
+                        .commit();
             }
         }
-
 
         return super.onOptionsItemSelected(item);
     }
