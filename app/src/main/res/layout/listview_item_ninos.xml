@@ -20,11 +20,12 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textAppearance="@color/abc_input_method_navigation_guard"
             android:text="Nombre del Contacto"
-            android:textColor="@drawable/list_item_text_selector"
+            android:textColor="@color/text_color_default"
             android:id="@+id/viewNomNino"
-            android:textSize="15dp" />
+            android:textStyle="bold"
+            android:textSize="16dp" />
 
         <LinearLayout
             android:orientation="horizontal"
