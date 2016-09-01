@@ -1,14 +1,16 @@
 package com.example.sponce.prjscmmovil;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.sponce.prjscmmovil.Fragment.FragmentListNinos;
 import com.example.sponce.prjscmmovil.Fragment.FragmentNinos;
 
-public class ActivityListaNinos extends AppCompatActivity {
+public class ActivityListaNinos extends AppCompatActivity implements FragmentListNinos.EscuchaFragmento {
 
     private boolean dosPaneles;
 
@@ -17,7 +19,7 @@ public class ActivityListaNinos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_ninos);
 
-        // ((Toolbar) findViewById(R.id.toolbar)).setTitle(getTitle());
+         //((Toolbar) findViewById(R.id.toolbar)).setTitle(getTitle());
 
         // Verificación: ¿Existe el detalle en el layout?
         if (findViewById(R.id.contenedor_detalle_articulo) != null) {
@@ -46,6 +48,18 @@ public class ActivityListaNinos extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.contenedor_detalle_articulo, fragment)
                 .commit();
+    }
+
+    @Override
+    public void alSeleccionarItem(String idArticulo) {
+        if (dosPaneles) {
+            cargarFragmentoDetalle();
+        } else {
+            Intent intent = new Intent(this, LoginActivity.class);
+            //intent.putExtra(FragmentoDetalleArticulo.ID_ARTICULO, idArticulo);
+
+            startActivity(intent);
+        }
     }
 
     @Override

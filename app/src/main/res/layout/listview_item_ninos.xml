@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="@dimen/altura_item"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="3dp"
     android:orientation="horizontal"
-    android:background="@drawable/list_selector"
+    card_view:cardCornerRadius="5dp"
+    card_view:cardUseCompatPadding="true" >
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/list_row_default_bg"
     android:layout_marginTop="@dimen/margen_estandar"
     android:layout_marginBottom="@dimen/margen_estandar">
-
 
     <LinearLayout
         android:orientation="vertical"
@@ -15,17 +23,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout"
-        android:layout_margin="5dp">
+        android:layout_margin="3dp">
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="@color/abc_input_method_navigation_guard"
             android:text="Nombre del Contacto"
-            android:textColor="@color/text_color_default"
+            android:textColor="@color/colorPrimary"
             android:id="@+id/viewNomNino"
             android:textStyle="bold"
             android:textSize="16dp" />
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/textView1"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorAccent" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -38,6 +55,7 @@
                 android:textColor="@drawable/list_item_text_selector"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Nomb Madre:"
+                android:textStyle="bold"
                 android:layout_marginTop="5dp"
                 android:id="@+id/textView"
                 android:textSize="10dp" />
@@ -49,7 +67,7 @@
                 android:textColor="@drawable/list_item_text_selector"
                 android:text="Telefono"
                 android:id="@+id/viewNomMadre"
-
+                android:textStyle="bold"
                 android:layout_marginTop="5dp"
                 android:textSize="12dp" />
 
@@ -68,6 +86,7 @@
                 android:text="Fecha Nac:"
                 android:layout_marginTop="5dp"
                 android:id="@+id/textView3"
+                android:textStyle="bold"
                 android:textSize="10dp" />
 
             <TextView
@@ -86,6 +105,7 @@
                 android:textColor="@drawable/list_item_text_selector"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Sexo: "
+                android:textStyle="bold"
                 android:layout_marginTop="5dp"
                 android:id="@+id/ViewText5"
                 android:textSize="10dp" />
@@ -113,6 +133,7 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Comun: "
                 android:layout_marginTop="5dp"
+                android:textStyle="bold"
                 android:id="@+id/textView5"
                 android:textSize="10dp" />
 
@@ -133,6 +154,7 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="      Muni: "
                 android:layout_marginTop="5dp"
+                android:textStyle="bold"
                 android:id="@+id/textView6"
                 android:textSize="10dp" />
 
@@ -153,6 +175,7 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="      Depar: "
                 android:layout_marginTop="5dp"
+                android:textStyle="bold"
                 android:id="@+id/textView4"
                 android:textSize="10dp" />
 
@@ -185,3 +208,5 @@
 
 
 </RelativeLayout>
+
+</android.support.v7.widget.CardView>

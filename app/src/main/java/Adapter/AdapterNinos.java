@@ -2,6 +2,7 @@ package Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,7 @@ public class AdapterNinos extends RecyclerView.Adapter<AdapterNinos.ViewHolder> 
     Context context;
 
     public AdapterNinos(ArrayList<Nino> listNinos, OnItemClickListener escuchaClicksExterna) {
-        this.listNinos = listNinos;
+        this.listNinos = new ArrayList<>(listNinos);
         this.escuchaClicksExterna = escuchaClicksExterna;
     }
 
@@ -115,6 +116,9 @@ public class AdapterNinos extends RecyclerView.Adapter<AdapterNinos.ViewHolder> 
             tvDepartamento = (TextView) itemView.findViewById(R.id.viewDepartamento);
             tvMunicipio = (TextView) itemView.findViewById(R.id.viewMunicipio);
 
+            itemView.setOnClickListener(this);
+
+
         }
 
 
@@ -122,13 +126,69 @@ public class AdapterNinos extends RecyclerView.Adapter<AdapterNinos.ViewHolder> 
         public void onClick(View view) {
             escuchaClicksExterna.onClick(this, obtenerId(getAdapterPosition()));
         }
+
     }
+
+
 
     public interface OnItemClickListener {
         public void onClick(ViewHolder viewHolder, String idArticulo);
     }
 
     private OnItemClickListener escuchaClicksExterna;
+
+
+    public void animateTo(List<Nino> models) {
+        applyAndAnimateRemovals(models);
+        applyAndAnimateAdditions(models);
+        applyAndAnimateMovedItems(models);
+    }
+
+    private void applyAndAnimateRemovals(List<Nino> newModels) {
+        for (int i = listNinos.size() - 1; i >= 0; i--) {
+            final Nino nino = listNinos.get(i);
+            if (!newModels.contains(nino)) {
+                removeItem(i);
+            }
+        }
+    }
+
+    private void applyAndAnimateAdditions(List<Nino> newModels) {
+        for (int i = 0, count = newModels.size(); i < count; i++) {
+            final Nino nino = newModels.get(i);
+            if (!listNinos.contains(nino)) {
+                addItem(i, nino);
+            }
+        }
+    }
+
+    private void applyAndAnimateMovedItems(List<Nino> newModels) {
+        for (int toPosition = newModels.size() - 1; toPosition >= 0; toPosition--) {
+            final Nino nino = newModels.get(toPosition);
+            final int fromPosition = listNinos.indexOf(nino);
+            if (fromPosition >= 0 && fromPosition != toPosition) {
+                moveItem(fromPosition, toPosition);
+            }
+        }
+    }
+
+    public Nino removeItem(int position) {
+        final Nino nino = listNinos.remove(position);
+        notifyItemRemoved(position);
+        return nino;
+    }
+
+    public void addItem(int position, Nino nino) {
+        listNinos.add(position, nino);
+        notifyItemInserted(position);
+    }
+
+    public void moveItem(int fromPosition, int toPosition) {
+        final Nino nino = listNinos.remove(fromPosition);
+        listNinos.add(toPosition, nino);
+        notifyItemMoved(fromPosition, toPosition);
+    }
+
 
 
 
